@@ -34,12 +34,12 @@ router.get('/', function(req, res) {
 
 router.route('/pokemons')
   .post(function(req, res) {
-    var vehicle = new Pokemon(); // new instance of a pokemon
+    var pokemon = new Pokemon(); // new instance of a pokemon
     pokemon.name = req.body.name;
     pokemon.type = req.body.type;
     pokemon.attack = req.body.attack;
 
-    vehicle.save(function(err) {
+    pokemon.save(function(err) {
       if (err) {
         res.send(err);
       }
@@ -48,17 +48,17 @@ router.route('/pokemons')
   })
 
   .get(function(req, res) {
-    Vehicle.find(function(err, pokemons) {
+    Pokemon.find(function(err, pokemons) {
       if (err) {
         res.send(err);
       }
-      res.json(vehicles);
+      res.json(pokemons);
     });
   });
 
-router.route('/vehicle/:pokemon_id')
+router.route('/pokemon/:pokemon_id')
   .get(function(req, res) {
-    Vehicle.findById(req.params.vehicle_id, function(err, vehicle) {
+    Pokemon.findById(req.params.pokemon_id, function(err, pokemon) {
       if (err) {
         res.send(err);
       }
@@ -66,37 +66,38 @@ router.route('/vehicle/:pokemon_id')
     });
   });
 
-router.route('/vehicle/name/:name')
+router.route('/pokemon/name/:name')
   .get(function(req, res) {
-    Vehicle.find({make:req.params.make}, function(err, vehicle) {
+    Pokemon.find({make:req.params.make}, function(err, pokemon) {
       if (err) {
         res.send(err);
       }
-      res.json(vehicle);
+      res.json(pokemon);
     });
   });
 
-router.route('/vehicle/type/:type')
+router.route('/pokemon/type/:type')
   .get(function(req, res) {
-    Vehicle.find({color:req.params.color}, function(err, vehicle) {
+    Pokemon.find({color:req.params.color}, function(err, pokemon) {
       if (err) {
         res.send(err);
       }
-      res.json(vehicle);
+      res.json(pokemon);
     });
   });
 
   router.route('/vehicle/attack/:attack')
     .get(function(req, res) {
-      Vehicle.find({color:req.params.color}, function(err, vehicle) {
+      Pokemon.find({color:req.params.color}, function(err, pokemon) {
         if (err) {
           res.send(err);
         }
-        res.json(vehicle);
+        res.json(pokemon);
       });
     });
 
 // Fire up server
 app.listen(port);
+
 // Print friendly message to console
 console.log('Server listening on port ' + port);
