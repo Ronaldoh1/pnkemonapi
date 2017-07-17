@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var PokemonSchema = new Schema({
-  make: String,
-  model: String,
-  color: String
+  name: String,
+  type: String,
+  attack: String
 });
 
 module.exports = mongoose.model('Pokemon', PokemonSchema);
